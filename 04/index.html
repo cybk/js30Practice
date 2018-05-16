@@ -60,13 +60,30 @@
     console.log(total);
 
     // 5. Sort the inventors by years lived
+    const sortLived = inventors.sort((first, second) => (first.passed - first.year) > (second.passed - second.year) ? -1 : 1);
+    console.log(sortLived);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    // const category = document.querySelector('.mw-category');
+    // const links = [...category.querySelectorAll('a')];
 
+    // const de = links
+    //         .map(link => link.textContent)
+    //         .filter(nm => nm.includes('de'));
+    
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const nmSorted = people.sort((first, second) => {
+      const [alast, afirst] = first.split(', ');
+      const [blast, bfirst] = second.split(', ');
+      return alast > blast? 1:-1;
+
+    });
+
+    console.log(nmSorted);
+
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these

@@ -22,6 +22,10 @@
     <form class="add-items">
       <input type="text" name="item" placeholder="Item Name" required>
       <input type="submit" value="+ Add Item">
+      <br></br>
+      <input type="button" class="reset" value="Reset">
+      <input type="button" class="chkAll" value="Check All">
+      <input type="button" class="uchkAll" value="Uncheck All">
     </form>
   </div>
 
@@ -29,6 +33,9 @@
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
   const items = JSON.parse(localStorage.getItem('items'))||[];
+  const reset = document.querySelector('.reset');
+  const checkAll = document.querySelector('.chkAll');
+  const uncheckAll = document.querySelector('.uchkAll');
 
   function addItem(e){
     e.preventDefault();
@@ -43,6 +50,14 @@
     populateList(items, itemsList);
     localStorage.setItem('items', JSON.stringify(items));
     this.reset();
+  }
+
+  function updateStatus(isChecked = false){
+
+    items.forEach(elem => elem.done = isChecked);
+    console.log(items);
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
   }
 
   function populateList(plates = [], platesList){
@@ -74,6 +89,17 @@
 
   addItems.addEventListener('submit', addItem);
   itemsList.addEventListener('click', toggleDone);
+  reset.addEventListener('click', () => {
+    localStorage.clear();
+    populateList([], itemsList);
+  });
+  checkAll.addEventListener('click', () =>{
+    updateStatus(true);
+  });
+  uncheckAll.addEventListener('click', () =>{
+    updateStatus(false);
+  });
+
   populateList(items, itemsList);
 
 </script>

@@ -231,6 +231,19 @@
     background.classList.add('open');
 
     const dropdown = this.querySelector('.dropdown');
+    const dropdownCoords = dropdown.getBoundingClientRect();
+    const navCoords = nav.getBoundingClientRect();
+
+    const cords = {
+      height: dropdownCoords.height,
+      width: dropdownCoords.width,
+      top: dropdownCoords.top - navCoords.top,
+      left: dropdownCoords.left - navCoords.left
+    }
+
+    background.style.setProperty('width', `${cords.width}px` );
+    background.style.setProperty('height', `${cords.height}px`);
+    background.style.setProperty('transform', `translate(${cords.left}px, ${cords.top}px)`);
   }
 
   function handleLeave(){

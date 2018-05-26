@@ -39,7 +39,16 @@
 
 <button></button>
 <script>
+  const divs = document.querySelectorAll('div');
 
+  function clickDiv(e){
+    console.log(this);
+    //e.stopPropagation();
+  }
+
+  divs.forEach(dv => dv.addEventListener('click', clickDiv, {
+    capture:false
+  }));
 </script>
 </body>
 </html>

@@ -38,6 +38,7 @@
   const moles = document.querySelectorAll('.mole');
   let lastcall;
   let timeUp = false;
+  let score = 0;
 
  function randTime (min, max) {
    return Math.round(Math.random() * (max-min) + min);
@@ -67,10 +68,20 @@
   function startGame () {
     scoreBoard.textContent = 0;
     timeUp = false;
+    score = 0;
 
     peep();
     setTimeout(() => timeUp = true, 10000);
   }
+
+  function bonk (e) {
+    if (!e.isTrusted) return; //Cheaters
+    score++;
+    this.parentNode.classList.remove('up');
+    scoreBoard.textContent = score;
+  }
+
+  moles.forEach(mol => mol.addEventListener('click', bonk));
 
 </script>
 </body>
